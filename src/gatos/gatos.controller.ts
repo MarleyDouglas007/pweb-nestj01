@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, HttpStatus, Param, Res } from '@nestjs/common';
+import { Body,Controller, Delete, Get, HttpStatus, Param, Res,Post, Put } from '@nestjs/common';
 import { Response } from 'express';
 import { Gato } from 'src/gato/gato.interface';
 
@@ -34,6 +34,7 @@ export class GatosController {
             response.status(HttpStatus.NOT_FOUND).send();
         }
     }
+    
 
     @Delete(':id')
     delete(@Param('id') id: string, @Res() response: Response) {
@@ -46,4 +47,15 @@ export class GatosController {
         }
     }
 
+
+    @Post()
+    create(@Body() gato: Gato) {
+        this.gatos.push(gato);
+        return gato;
+    }
+
+    @Put(':id')
+    update(){
+        console.log('update')
+    }
 }
